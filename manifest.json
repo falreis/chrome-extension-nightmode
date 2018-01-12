@@ -3,7 +3,7 @@
 
   "name": "Night Mode - Alfa Version",
   "author": "Felipe A. L. Reis",
-  "description": "This extension allows the user view the page in night mode. All colors will be the opposite.",
+  "description": "This extension allows the user view the page in night mode.",
   "version": "0.1",
 
   "icons":{
