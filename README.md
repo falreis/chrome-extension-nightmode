@@ -18,9 +18,9 @@ When disabled, the extension just remove the css added.
 Here some images to show the results of the plugin.
 ![YouTube Night Mode][image1]
 
-![Globo.com Night Mode][image1]
+![Globo.com Night Mode][image2]
 
-![StackOverflow Night Mode][image1]
+![StackOverflow Night Mode][image3]
 
 ## Known Issues
 If the page contains css code inside style tags, when the extension is disabled, after a previous enabled, the colors might be lost.
