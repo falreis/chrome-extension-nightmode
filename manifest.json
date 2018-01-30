@@ -3,8 +3,8 @@
 
   "name": "Night Mode - Alfa Version",
   "author": "Felipe A. L. Reis",
-  "description": "This extension allows the user view the page in night mode.",
-  "version": "0.1",
+  "description": "This extension allows the user to view pages in night mode.",
+  "version": "0.3",
 
   "icons":{
     "128": "favicon.png"
@@ -15,9 +15,16 @@
   },
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "tabs", 
+    "http://*/*", 
+    "https://*/*"
   ],
+  "background": {
+    "scripts": ["popup.js"],
+    "persistent": false
+  },
   "homepage_url": "http://falreis.eng.br",
   "short_name": "Night Mode",
-  "version_name": "FALR-NM-A01"
+  "version_name": "FALR-NM-A03"
 }
