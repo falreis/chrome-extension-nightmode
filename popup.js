@@ -44,34 +44,33 @@ function replaceAll(str, needle, replacement) {
   return str.split(needle).join(replacement);
 }
 
-function enableBackgroundColor() {
+function enableBackgroundColor(tabId) {
   var multiline_script = getBaseScript().split('{0}').join('#FFF')
                                         .split('{1}').join('#000')
                                         .split('{2}').join('#00DD00')
                                         .split('{3}').join('#FFFF00')
                                         .split('{4}').join('#CCC')
   ;
-  run(multiline_script);
+  run(multiline_script, tabId);
 }
 
-function disableBackgroundColor() {
+function disableBackgroundColor(tabId) {
   var multiline_script = getBaseScript().split('{0}').join('')
                                         .split('{1}').join('')
                                         .split('{2}').join('')
                                         .split('{3}').join('')
                                         .split('{4}').join('')
   ;
-  run(multiline_script);
+  run(multiline_script, tabId);
 }
 
-function run(my_script){
-  chrome.tabs.executeScript({
-      file: 'jquery-3.2.1.min.js'
-    }, function() {
-        chrome.tabs.executeScript({
-          code: my_script
-        });
-  });
+function run(my_script, tabId){
+  if(tabId){
+    chrome.tabs.executeScript({ file: 'jquery-3.2.1.min.js'}, function() {chrome.tabs.executeScript(tabId, {code: my_script});});
+  }
+  else{
+    chrome.tabs.executeScript({ file: 'jquery-3.2.1.min.js'}, function() {chrome.tabs.executeScript({code: my_script});});
+  }
 }
 
 /**
@@ -128,11 +127,11 @@ function Controller(url){
   });
 }
 
-function AutomaticController(url){
+function AutomaticController(url, tabId){
   getSavedBackgroundColor(url, (savedColor) => {
     if (savedColor) {
       if(savedColor == "Enabled"){
-        enableBackgroundColor();
+        enableBackgroundColor(tabId);
       }
     }
   });
@@ -157,8 +156,7 @@ function myListener(tabId, changeInfo, tab ){
   if (changeInfo.status == "complete" ){
     chrome.tabs.query({'active': true}, function (tabs) {
       var domain = tabs[0].url.match(/^[\w-]+:\/{2,}\[?([\w\.:-]+)\]?(?::[0-9]*)?/)[0];
-      AutomaticController(domain);
-      chrome.tabs.onUpdated.removeListener(myListener);
+      AutomaticController(domain, tabId);
     });
   }
 }
